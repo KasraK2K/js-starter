@@ -14,7 +14,7 @@ import path from 'path'
 export default {
 	boot: [
 		'envirement',
-		'cron-jobs',
+		// 'cron-jobs',
 		// 'mongodb',
 		// 'mongoose',
 		// 'postgresql',

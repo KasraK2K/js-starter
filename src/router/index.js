@@ -19,6 +19,7 @@ const { swagger } = starterConfig
 // ────────────────────────────────────────────────────────────────────────
 //   :::::: C O N T R O L L E R S : :  :   :    :     :        :          :
 // ────────────────────────────────────────────────────────────────────────
+import Controller from '../controller/Controller'
 import generalController from '../controller/GeneralController'
 
 // ────────────────────────────────────────────────────────────────────────
@@ -37,7 +38,7 @@ swagger.enabled && router.use(swagger.endpoint, swaggerUi.serve, swaggerUi.setup
 
 // 404
 router.use('*', (req, res) => {
-	return new BaseController().resGen({
+	return new Controller().resGen({
 		req,
 		res,
 		status: 404,
