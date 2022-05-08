@@ -1,6 +1,6 @@
 import Middleware from './Middleware'
 import rateLimit from 'express-rate-limit'
-import Controller from '../gateway/Controller'
+import Controller from '../controller/Controller'
 import config from 'config'
 
 const reateLimiterConfig = config.get('rate_limiter')

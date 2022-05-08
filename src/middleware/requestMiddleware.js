@@ -1,9 +1,10 @@
 import Middleware from './Middleware'
 import jwt from 'jsonwebtoken'
-import Controller from '../gateway/Controller'
+import Controller from '../controller/Controller'
 import _ from 'lodash'
+// import { logger } from '../common/logic/logger'
 
-const { logger, process_id } = global
+const { process_id } = global
 
 class RequestMiddleware extends Middleware {
 	isPost(req, res, next) {
@@ -26,7 +27,7 @@ class RequestMiddleware extends Middleware {
 				error_code: 3005,
 			})
 		}
-	    next()
+		next()
 	}
 
 	auth(req, res, next) {

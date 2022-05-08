@@ -1,16 +1,16 @@
-import express from 'express'
+import './boot'
+import { app, express } from './boot'
 import _ from 'lodash'
 import { locals, globals } from './common/variables'
 import config from 'config'
 import cors from 'cors'
 import helmet from 'helmet'
 import compression from 'compression'
-import homeController from './gateway/homeController'
 import rateLimiterMiddleware from './middleware/rateLimiterMiddleware'
 import requestMiddleware from './middleware/requestMiddleware'
+import router from './router'
 
 const corsConfig = config.get('cors')
-const app = express()
 
 class Application {
 	constructor(port) {
@@ -44,12 +44,12 @@ class Application {
 			})
 		)
 		app.use(rateLimiterMiddleware.check())
-		app.use(requestMiddleware.isPost)
+		// app.use(requestMiddleware.isPost)
 		// app.use(requestMiddleware.auth)
 	}
 
 	routes() {
-		app.get('/', homeController.home)
+		app.use('/', router)
 	}
 
 	start() {
