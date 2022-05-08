@@ -8,7 +8,7 @@ import helmet from 'helmet'
 import compression from 'compression'
 import rateLimiterMiddleware from './http/middlewares/rateLimiterMiddleware'
 import requestMiddleware from './http/middlewares/requestMiddleware'
-import router from './http/router'
+import router from './http/routes'
 
 const corsConfig = config.get('cors')
 
