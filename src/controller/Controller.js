@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import config from 'config'
 import { getError } from '../common/logic/errors'
+import { logger } from '../common/logic/logger'
 
 const applicationConfig = config.get('application')
 const mode = config.get('mode')
@@ -13,7 +14,7 @@ class Controller {
 	resGen(args) {
 		const { res, status } = args
 		const generatedStatus = Controller.statusGen(status)
-		console.log(`{green}${JSON.stringify(_.omit(res.locals.params, ['process_id']), null, 2)}{reset}`)
+		logger(`{green}${JSON.stringify(_.omit(res.locals.params, ['process_id']), null, 2)}{reset}`, 'request')
 
 		return args.result
 			? res.status(generatedStatus).json(Controller.responseGenerator(args))
@@ -32,7 +33,7 @@ class Controller {
 			result,
 			data: Array.isArray(data) ? data : [data],
 		}
-		console.log(_.omit(response, 'data'))
+		logger(_.omit(response, 'data'), 'request')
 		return response
 	}
 
@@ -51,7 +52,7 @@ class Controller {
 			error_message: error.message,
 			error_user_messages,
 		}
-		console.log(response)
+		logger(response, 'request')
 		return response
 	}
 

@@ -18,7 +18,8 @@ const applicationConfig = config.get('application')
 export const logger = (text, type) => {
 	const isServer = JSON.parse(process.env.IS_ON_SERVER || 'false')
 	const now = new Date()
-	const date = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2)
+	const date =
+		now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2)
 
 	const path = `${applicationConfig.logger.logFilePath}${date}/`
 
@@ -52,7 +53,9 @@ export const logger = (text, type) => {
 		.replace(/{reset}/g, '\x1b[0m')
 
 	// ────────── SHOW LOG IF DATABASE LOG WAS DESABLE AND CONSOLE LOG WAS ENABLE ─────
-	!applicationConfig.logger.logOnDatabase && applicationConfig.logger.logOnConsole && console.log('- ' + text)
+	!applicationConfig.logger.logOnDatabase &&
+		applicationConfig.logger.logOnConsole &&
+		console.log('- ' + text + '\n')
 	// ─────────────────────────────────────────────── START: SAVE LOG ON MONGODB ─────
 	// applicationConfig.logger.logOnDatabase &&
 	// 	(async () => {
