@@ -12,7 +12,6 @@
 //   :::::: R E F L E C T   M E T A D A T A : :  :   :    :     :        :          :
 // ──────────────────────────────────────────────────────────────────────────────────
 import 'reflect-metadata'
-import './extend'
 import starterConfig from '../../starter.config'
 import express from 'express'
 import mongoClient from './mongodb'
