@@ -7,6 +7,7 @@ import helmet from 'helmet'
 import compression from 'compression'
 import homeController from './gateway/homeController'
 import rateLimiterMiddleware from './middleware/rateLimiterMiddleware'
+import requestMiddleware from './middleware/requestMiddleware'
 
 const corsConfig = config.get('cors')
 const app = express()
@@ -43,6 +44,8 @@ class Application {
 			})
 		)
 		app.use(rateLimiterMiddleware.check())
+		app.use(requestMiddleware.isPost)
+		// app.use(requestMiddleware.auth)
 	}
 
 	routes() {

@@ -9,6 +9,7 @@
 //==========================================================================
 
 import config from 'config'
+import { logger } from '../common/logic/logger'
 
 const configs = config.util.toObject()
 
@@ -32,6 +33,7 @@ export const globals = {
 			portal: configs.application.portal_version,
 		},
 	},
+	logger,
 }
 
 export default {
