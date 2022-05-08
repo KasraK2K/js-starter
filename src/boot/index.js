@@ -23,7 +23,7 @@ import { createRedisClient } from './redis'
 const app = express()
 
 starterConfig.boot.forEach(async (moduleName) => {
-	fs.existsSync(`./${moduleName}`) && (await import(`./${moduleName}`).catch((err) => console.log(err.message)))
+	await import(`./${moduleName}`).catch((err) => console.log(err.message))
 
 	// ─── MONGODB ────────────────────────────────────────────────────────────────────
 	moduleName === 'mongodb' &&
