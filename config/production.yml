@@ -1,0 +1,38 @@
+mode: production
+
+application:
+  port: 3000
+  print_info: false
+  logger:
+    logFilePath: "/var/embargo-logs/js-api/"
+    logOnFile: false
+    logOnConsole: true
+    logOnDatabase: true
+
+database:
+  mongodb:
+    name: "js_starter"
+    default_collection: "default"
+    uri: "mongodb://0.0.0.0:27017/js_starter"
+  postgres:
+    user: "postgres"
+    host: "0.0.0.0"
+    database: "js_starter"
+    password: "postgres"
+    port: 5432
+    idleTimeoutMillis: 10000
+    connectionTimeoutMillis: 10000
+    ssl:
+      rejectUnauthorized: false
+  redis:
+    uri: "redis://localhost:6379"
+
+cors:
+  allow_origin: "*"
+  allow_method: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"]
+
+rate_limiter:
+  windowMs: 60000
+  max: 100
+  standardHeaders: true
+  legacyHeaders: false
