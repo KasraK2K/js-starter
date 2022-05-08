@@ -9,6 +9,8 @@
 //==========================================================================
 
 import config from 'config'
+import { logger } from '../common/logic/logger'
+import { mongoClient, pool } from '../boot'
 
 const configs = config.util.toObject()
 
@@ -32,6 +34,16 @@ export const globals = {
 			portal: configs.application.portal_version,
 		},
 	},
+	mongo: {
+		mongoClient,
+		database: (databaseName) => mongoClient.db(databaseName ?? configs.database.mongodb.name),
+		collection: (collectionName) =>
+			mongoClient
+				.db(configs.database.mongodb.name)
+				.collection(collectionName ?? configs.database.mongodb.default_collection),
+	},
+	pg: { pool },
+	logger,
 }
 
 export default {

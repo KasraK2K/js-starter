@@ -58,39 +58,39 @@ export const logger = (text, type) => {
 		applicationConfig.logger.logOnConsole &&
 		console.log('- ' + text + '\n')
 	// ─────────────────────────────────────────────── START: SAVE LOG ON MONGODB ─────
-	// applicationConfig.logger.logOnDatabase &&
-	// 	(async () => {
-	// 		await mongo
-	// 			.collection(`${type}_logs`)
-	// 			.insertOne({
-	// 				text: logText,
-	// 				time: now.toUTCString(),
-	// 				process_id,
-	// 				path,
-	// 			})
-	// 			.then(() => {
-	// 				applicationConfig.logger.logOnConsole && console.log('- ' + text)
-	// 			})
-	// 			.catch((err) => console.log('Logger mongodb insert:', err.stack))
-	// 	})()
+	applicationConfig.logger.logOnDatabase &&
+		(async () => {
+			await global.mongo
+				.collection(`${type}_logs`)
+				.insertOne({
+					text: logText,
+					time: now.toUTCString(),
+					process_id,
+					path,
+				})
+				.then(() => {
+					applicationConfig.logger.logOnConsole && console.log('- ' + text)
+				})
+				.catch((err) => console.log('Logger mongodb insert:', err.stack))
+		})()
 	// ────────────────────────────────────────────────────────────────────────────────
-	// applicationConfig.logger.logOnDatabase &&
-	// 	![LoggerEnum.REQUEST].includes(type) &&
-	// 	(async () => {
-	// 		await mongo
-	// 			.collection('all_logs')
-	// 			.insertOne({
-	// 				type,
-	// 				text: logText,
-	// 				time: now.toUTCString(),
-	// 				process_id,
-	// 				path,
-	// 			})
-	// 			.then(() => {
-	// 				applicationConfig.logger.logOnConsole && console.log('- ' + text)
-	// 			})
-	// 			.catch((err) => console.log('Logger mongodb insert:', err.stack))
-	// 	})()
+	applicationConfig.logger.logOnDatabase &&
+		!['request'].includes(type) &&
+		(async () => {
+			await global.mongo
+				.collection('all_logs')
+				.insertOne({
+					type,
+					text: logText,
+					time: now.toUTCString(),
+					process_id,
+					path,
+				})
+				.then(() => {
+					applicationConfig.logger.logOnConsole && console.log('- ' + text)
+				})
+				.catch((err) => console.log('Logger mongodb insert:', err.stack))
+		})()
 	// ───────────────────────────────────────────────── END: SAVE LOG ON MONGODB ─────
 
 	if (applicationConfig.logger.logOnFile && isServer) {
