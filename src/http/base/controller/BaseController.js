@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import config from 'config'
-import { getError } from '../../common/logic/errors'
-import { logger } from '../../common/logic/logger'
+import { getError } from '../../../common/logic/errors'
+import { logger } from '../../../common/logic/logger'
 
 const applicationConfig = config.get('application')
 const mode = config.get('mode')

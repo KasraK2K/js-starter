@@ -1,4 +1,4 @@
-import BaseController from '../../base/BaseController'
+import BaseController from '../../base/controller/BaseController'
 
 class GeneralController extends BaseController {
 	shakeHand(req, res) {
