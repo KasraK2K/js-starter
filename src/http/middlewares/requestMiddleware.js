@@ -1,10 +1,10 @@
-import Middleware from './Middleware'
+import BaseMiddleware from '../base/BaseMiddleware'
 import jwt from 'jsonwebtoken'
-import Controller from '../controller/Controller'
+import BaseController from '../base/BaseController'
 import _ from 'lodash'
 import { logger } from '../../common/logic/logger'
 
-class RequestMiddleware extends Middleware {
+class RequestMiddleware extends BaseMiddleware {
 	processIdAdder(req, res, next) {
 		const process_id = (+new Date() + Math.floor(Math.random() * (999 - 100) + 100)).toString(16)
 		_.assign(global, { process_id })
@@ -13,7 +13,7 @@ class RequestMiddleware extends Middleware {
 	}
 
 	isPost(req, res, next) {
-		const controller = new Controller()
+		const controller = new BaseController()
 		logger(`{blue}[${req.method}]: ${req.originalUrl}{reset}`, 'request')
 
 		const ignoreCheckMethod = ['swagger']
@@ -34,7 +34,7 @@ class RequestMiddleware extends Middleware {
 	}
 
 	auth(req, res, next) {
-		const controller = new Controller()
+		const controller = new BaseController()
 		const apiKeys = process.env.API_KEYS?.split(',') || []
 		const ignoreApikeys = ['swagger']
 		const ignoreToken = ['login', 'logout', 'shake-hand', 'swagger']
@@ -48,7 +48,7 @@ class RequestMiddleware extends Middleware {
 		// ───────────────────────────────── IF PARAMS HAS NOT API KEY ─────
 		if (checkApiKey && (!params.api_key || !apiKeys.includes(params.api_key))) {
 			logger('{red}api_key is not verify{reset}', 'error')
-			return controller.resGen({
+			return BaseController.resGen({
 				req,
 				res,
 				status: 401,
@@ -63,7 +63,7 @@ class RequestMiddleware extends Middleware {
 			// ─────────────────────── IF JESON WEB TOKEN VARIFY HAS ERROR ─────
 			if (!jwtPayload.result) {
 				logger('{red}token is not verify{reset}', 'error')
-				return controller.resGen({
+				return BaseController.resGen({
 					req,
 					res,
 					status: 401,

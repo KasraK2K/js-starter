@@ -1,11 +1,11 @@
-import Middleware from './Middleware'
+import BaseMiddleware from '../base/BaseMiddleware'
 import rateLimit from 'express-rate-limit'
-import Controller from '../controller/Controller'
+import BaseController from '../base/BaseController'
 import config from 'config'
 
 const reateLimiterConfig = config.get('rate_limiter')
 
-class RateLimiterMiddleware extends Middleware {
+class RateLimiterMiddleware extends BaseMiddleware {
 	constructor(controller) {
 		super()
 		this.controller = controller
@@ -30,4 +30,4 @@ class RateLimiterMiddleware extends Middleware {
 	}
 }
 
-export default new RateLimiterMiddleware(new Controller())
+export default new RateLimiterMiddleware(new BaseController())

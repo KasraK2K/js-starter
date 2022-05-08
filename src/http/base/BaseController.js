@@ -6,19 +6,19 @@ import { logger } from '../../common/logic/logger'
 const applicationConfig = config.get('application')
 const mode = config.get('mode')
 
-class Controller {
+class BaseController {
 	logger() {
 		console.log('Log from BaseController')
 	}
 
 	resGen(args) {
 		const { res, status } = args
-		const generatedStatus = Controller.statusGen(status)
+		const generatedStatus = BaseController.statusGen(status)
 		logger(`{green}${JSON.stringify(_.omit(res.locals.params, ['process_id']), null, 2)}{reset}`, 'request')
 
 		return args.result
-			? res.status(generatedStatus).json(Controller.responseGenerator(args))
-			: res.status(generatedStatus).json(Controller.errorGenerator(args))
+			? res.status(generatedStatus).json(BaseController.responseGenerator(args))
+			: res.status(generatedStatus).json(BaseController.errorGenerator(args))
 	}
 
 	static responseGenerator(options) {
@@ -66,4 +66,4 @@ class Controller {
 	}
 }
 
-export default Controller
+export default BaseController
