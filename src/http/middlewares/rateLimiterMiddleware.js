@@ -1,6 +1,6 @@
-import BaseMiddleware from '../base/middleware/BaseMiddleware'
+import BaseMiddleware from '../classes/middleware/BaseMiddleware'
 import rateLimit from 'express-rate-limit'
-import BaseController from '../base/controller/BaseController'
+import BaseController from '../classes/controller/BaseController'
 import config from 'config'
 
 const reateLimiterConfig = config.get('rate_limiter')

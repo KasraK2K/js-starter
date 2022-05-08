@@ -1,6 +1,6 @@
-import BaseMiddleware from '../base/middleware/BaseMiddleware'
+import BaseMiddleware from '../classes/middleware/BaseMiddleware'
 import jwt from 'jsonwebtoken'
-import BaseController from '../base/controller/BaseController'
+import BaseController from '../classes/controller/BaseController'
 import _ from 'lodash'
 import { logger } from '../../common/helpers/logger'
 
