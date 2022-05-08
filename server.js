@@ -1,6 +1,6 @@
 import config from 'config'
 import Application from './src/Application'
-import { logger } from './src/common/logic/logger'
+import { logger } from './src/common/helpers/logger'
 
 const appConfig = config.get('application')
 const server = new Application(appConfig.port)

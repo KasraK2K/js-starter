@@ -2,7 +2,7 @@ import BaseMiddleware from '../base/middleware/BaseMiddleware'
 import jwt from 'jsonwebtoken'
 import BaseController from '../base/controller/BaseController'
 import _ from 'lodash'
-import { logger } from '../../common/logic/logger'
+import { logger } from '../../common/helpers/logger'
 
 class RequestMiddleware extends BaseMiddleware {
 	processIdAdder(req, res, next) {

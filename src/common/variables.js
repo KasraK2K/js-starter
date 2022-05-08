@@ -9,7 +9,7 @@
 //==========================================================================
 
 import config from 'config'
-import { logger } from '../common/logic/logger'
+import { logger } from '../common/helpers/logger'
 import { mongoClient, pool } from '../boot'
 
 const configs = config.util.toObject()
