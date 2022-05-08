@@ -19,7 +19,7 @@ const { swagger } = starterConfig
 // ────────────────────────────────────────────────────────────────────────
 //   :::::: C O N T R O L L E R S : :  :   :    :     :        :          :
 // ────────────────────────────────────────────────────────────────────────
-import homeController from '../controller/homeController'
+import generalController from '../controller/GeneralController'
 
 // ────────────────────────────────────────────────────────────────────────
 //   :::::: M I D D L E W A R E S : :  :   :    :     :        :          :
@@ -30,7 +30,7 @@ import homeController from '../controller/homeController'
 // ──────────────────────────────────────────────────────────────
 //   :::::: R O U T E S : :  :   :    :     :        :          :
 // ──────────────────────────────────────────────────────────────
-router.get('/', homeController.home)
+router.get('/shake-hand', generalController.shakeHand)
 
 // swagger
 swagger.enabled && router.use(swagger.endpoint, swaggerUi.serve, swaggerUi.setup(swaggerDocument, swagger.options))
