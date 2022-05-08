@@ -2,7 +2,7 @@ import Middleware from './Middleware'
 import jwt from 'jsonwebtoken'
 import Controller from '../controller/Controller'
 import _ from 'lodash'
-// import { logger } from '../common/logic/logger'
+import { logger } from '../../common/logic/logger'
 
 class RequestMiddleware extends Middleware {
 	processIdAdder(req, res, next) {
