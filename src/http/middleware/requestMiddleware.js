@@ -4,12 +4,10 @@ import Controller from '../controller/Controller'
 import _ from 'lodash'
 // import { logger } from '../common/logic/logger'
 
-const { process_id } = global
-
 class RequestMiddleware extends Middleware {
 	isPost(req, res, next) {
 		const controller = new Controller()
-		_.assign(res.locals, { params: { process_id } })
+		_.assign(res.locals, { params: { process_id: global.process_id } })
 
 		logger(`{blue}[${req.method}]: ${req.originalUrl}{reset}`, 'request')
 

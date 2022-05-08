@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import config from 'config'
-import { getError } from '../common/logic/errors'
-import { logger } from '../common/logic/logger'
+import { getError } from '../../common/logic/errors'
+import { logger } from '../../common/logic/logger'
 
 const applicationConfig = config.get('application')
 const mode = config.get('mode')
@@ -24,6 +24,7 @@ class Controller {
 	static responseGenerator(options) {
 		const { req, result, data } = options
 		const response = {
+			process_id: global.process_id,
 			api_version: applicationConfig.api_version,
 			front_version: applicationConfig.front_version,
 			portal_vertion: applicationConfig.portal_version,
@@ -41,6 +42,7 @@ class Controller {
 		const { req, result, error_code, error_user_messages } = options
 		const error = getError(error_code ?? 3000)
 		const response = {
+			process_id: global.process_id,
 			api_version: applicationConfig.api_version,
 			front_version: applicationConfig.front_version,
 			portal_vertion: applicationConfig.portal_version,

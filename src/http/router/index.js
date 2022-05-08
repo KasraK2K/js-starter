@@ -10,8 +10,8 @@
 
 import express from 'express'
 import swaggerUi from 'swagger-ui-express'
-import swaggerDocument from '../swagger'
-import starterConfig from '../../starter.config'
+import swaggerDocument from '../../swagger'
+import starterConfig from '../../../starter.config'
 
 const router = express.Router()
 const { swagger } = starterConfig
