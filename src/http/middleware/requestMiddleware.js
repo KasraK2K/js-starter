@@ -5,10 +5,15 @@ import _ from 'lodash'
 // import { logger } from '../common/logic/logger'
 
 class RequestMiddleware extends Middleware {
+	processIdAdder(req, res, next) {
+		const process_id = (+new Date() + Math.floor(Math.random() * (999 - 100) + 100)).toString(16)
+		_.assign(global, { process_id })
+		_.assign(res.locals, { params: { process_id } })
+		next()
+	}
+
 	isPost(req, res, next) {
 		const controller = new Controller()
-		_.assign(res.locals, { params: { process_id: global.process_id } })
-
 		logger(`{blue}[${req.method}]: ${req.originalUrl}{reset}`, 'request')
 
 		const ignoreCheckMethod = ['swagger']

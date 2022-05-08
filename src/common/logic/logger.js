@@ -20,6 +20,7 @@ export const logger = (text, type) => {
 	const now = new Date()
 	const date =
 		now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2)
+	const processId = global.process_id ?? (+new Date() + Math.floor(Math.random() * (999 - 100) + 100)).toString(16)
 
 	const path = `${applicationConfig.logger.logFilePath}${date}/`
 
@@ -32,7 +33,7 @@ export const logger = (text, type) => {
 		':' +
 		('0' + now.getSeconds()).slice(-2) +
 		' ' +
-		global.process_id
+		processId
 
 	if (typeof text === 'object' || Array.isArray(text)) {
 		text = JSON.stringify(text, null, 2)

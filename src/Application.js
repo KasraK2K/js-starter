@@ -16,9 +16,6 @@ class Application {
 	constructor(port) {
 		this.port = port
 
-		const process_id = (+new Date() + Math.floor(Math.random() * (999 - 100) + 100)).toString(16)
-		_.assign(global, { process_id })
-
 		this.config()
 		this.middlewares()
 		this.routes()
@@ -43,6 +40,7 @@ class Application {
 				origin: corsConfig.allow_origin,
 			})
 		)
+		app.use(requestMiddleware.processIdAdder)
 		app.use(rateLimiterMiddleware.check())
 		// app.use(requestMiddleware.isPost)
 		// app.use(requestMiddleware.auth)
