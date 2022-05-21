@@ -8,8 +8,8 @@ class GeneralController extends BaseController {
 	}
 
 	async upload(req, res) {
-		// fs.unlinkSync(req.body.files.avatar.filepath)
-		return res.json(req.body)
+		fs.unlinkSync(req.body.files.avatar.filepath)
+		return super.resGen({ req, res, result: true, data: req.body })
 		// await uploadLogic
 		//   .upload(req.body)
 		//   .then((response) => super.resGen({ req, res, result: response.result, data: response.data }))
