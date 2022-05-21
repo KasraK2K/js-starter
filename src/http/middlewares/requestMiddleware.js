@@ -12,6 +12,11 @@ class RequestMiddleware extends BaseMiddleware {
 		next()
 	}
 
+	removeApiKeys(req, res, next) {
+		req.body = _.omit(req.body, 'api_key')
+		next()
+	}
+
 	isPost(req, res, next) {
 		const controller = new BaseController()
 		logger(`{blue}[${req.method}]: ${req.originalUrl}{reset}`, 'request')
@@ -48,7 +53,7 @@ class RequestMiddleware extends BaseMiddleware {
 		// ───────────────────────────────── IF PARAMS HAS NOT API KEY ─────
 		if (checkApiKey && (!params.api_key || !apiKeys.includes(params.api_key))) {
 			logger('{red}api_key is not verify{reset}', 'error')
-			return BaseController.resGen({
+			return new BaseController().resGen({
 				req,
 				res,
 				status: 401,
@@ -63,7 +68,7 @@ class RequestMiddleware extends BaseMiddleware {
 			// ─────────────────────── IF JESON WEB TOKEN VARIFY HAS ERROR ─────
 			if (!jwtPayload.result) {
 				logger('{red}token is not verify{reset}', 'error')
-				return BaseController.resGen({
+				return new BaseController().resGen({
 					req,
 					res,
 					status: 401,

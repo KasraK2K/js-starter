@@ -15,6 +15,8 @@ const map = new Map([
 	[3013, 'Error on sending email'],
 	[3014, 'Data Not Found'],
 	[3015, 'Constraint erro'],
+	[3016, 'Error on extending multipart header'],
+	[3016, 'Error on uploading file'],
 ])
 
 export const getError = (code) => {
