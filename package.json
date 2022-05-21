@@ -17,6 +17,8 @@
   "author": "Kasra Karami <Kasra.Karami.KK@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "ajv": "^8.11.0",
+    "ajv-formats": "^2.1.1",
     "auto-bind": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",

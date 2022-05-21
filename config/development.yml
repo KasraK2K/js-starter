@@ -12,7 +12,7 @@ application:
 upload:
   # the directory for placing file uploads in. You can move them later by using fs.rename()
   uploadDir: 'statics'
-  responsePath: 'https://assets-dev.embargoapp.com'
+  responsePath: 'http://localhost:3500'
   # to include the extensions of the original files or not
   keepExtensions: true
   # when you call the .parse method, the files argument (of the callback) will contain arrays of files for inputs which submit multiple files using the HTML5 multiple attribute. Also, the fields argument will contain arrays of values for fields that have names ending with '[]'

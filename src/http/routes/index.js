@@ -20,7 +20,7 @@ const { swagger } = starterConfig
 //   :::::: C O N T R O L L E R S : :  :   :    :     :        :          :
 // ────────────────────────────────────────────────────────────────────────
 import BaseController from '../classes/controller/BaseController'
-import generalController from '../modules/general/generalController'
+import generalController from '../modules/general/controller'
 
 // ────────────────────────────────────────────────────────────────────────
 //   :::::: M I D D L E W A R E S : :  :   :    :     :        :          :

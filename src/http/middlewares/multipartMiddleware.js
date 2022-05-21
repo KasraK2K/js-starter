@@ -6,7 +6,7 @@ import config from 'config'
 import { logger } from '../../common/helpers/logger'
 import os from 'os'
 import fs from 'fs'
-import path from 'path'
+import { uploadDirPath, removeUploaded } from '../../common/helpers/upload'
 
 const uploadConfig = config.get('upload')
 
@@ -15,12 +15,17 @@ class MultipartMiddleware extends BaseMiddleware {
 		if ((req.headers['content-type'] ?? '').startsWith('multipart/form-data')) {
 			const form = formidable({
 				...uploadConfig,
-				uploadDir: MultipartMiddleware.uploadDirGen(uploadConfig.uploadDir),
+				uploadDir: uploadDirPath(uploadConfig.uploadDir),
 			})
+			let error = false
+
+			/* ------------------------------ START: EVENTS ----------------------------- */
+			form.on('error', (err) => (error = true))
+			/* ------------------------------- END: EVENTS ------------------------------ */
 
 			form.parse(req, (err, fields, files) => {
 				if (err) {
-					logger(`{red}Error on extending multipart header{reset}`, 'error')
+					logger(`{red}Error on multipart header{reset}`, 'error')
 					logger(`{red}${err.stack}{reset}`, 'error')
 					return new BaseController().resGen({
 						req,
@@ -28,13 +33,11 @@ class MultipartMiddleware extends BaseMiddleware {
 						status: 500,
 						result: false,
 						error_code: 3016,
-						error_user_messages: err,
 					})
 				}
 
 				if (typeof files === 'object' && !Array.isArray(files)) {
 					const filesKeys = _.keys(files)
-					let error = false
 
 					filesKeys.forEach((fileKey) => {
 						const file = files[fileKey]
@@ -48,10 +51,7 @@ class MultipartMiddleware extends BaseMiddleware {
 					})
 
 					if (error) {
-						filesKeys.forEach((fileKey) => {
-							const file = files[fileKey]
-							fs.unlinkSync(file.filepath)
-						})
+						removeUploaded(files)
 						logger(`{red}Error on uploading file{reset}`, 'error')
 						return new BaseController().resGen({
 							req,
@@ -69,12 +69,6 @@ class MultipartMiddleware extends BaseMiddleware {
 				next()
 			})
 		} else next()
-	}
-
-	static uploadDirGen(configPath) {
-		if (configPath === 'tmp') return os.tmpdir()
-		else if (configPath === 'statics') return path.resolve(process.cwd(), './src/statics')
-		else return configPath
 	}
 }
 
