@@ -9,7 +9,7 @@ export const generalSchema = {
 		required: ['files', 'fields'],
 		properties: {
 			files: { type: 'object', minProperties: 1 },
-			fields: { type: 'object', minProperties: 1 },
+			fields: { type: 'object' },
 		},
 	},
 }

@@ -17,23 +17,17 @@ class MultipartMiddleware extends BaseMiddleware {
 				...uploadConfig,
 				uploadDir: uploadDirPath(uploadConfig.uploadDir),
 			})
-			let error = false
+			let checkUpload = { error: false, code: 3000 }
 
 			/* ------------------------------ START: EVENTS ----------------------------- */
-			form.on('error', (err) => (error = true))
+			form.on('error', (err) => (checkUpload = { error: true, code: 3017 }))
 			/* ------------------------------- END: EVENTS ------------------------------ */
 
 			form.parse(req, (err, fields, files) => {
 				if (err) {
 					logger(`{red}Error on multipart header{reset}`, 'error')
 					logger(`{red}${err.stack}{reset}`, 'error')
-					return new BaseController().resGen({
-						req,
-						res,
-						status: 500,
-						result: false,
-						error_code: 3016,
-					})
+					checkUpload = { error: true, code: 3016 }
 				}
 
 				if (typeof files === 'object' && !Array.isArray(files)) {
@@ -45,12 +39,11 @@ class MultipartMiddleware extends BaseMiddleware {
 							uploadConfig.validMimeTypes &&
 							uploadConfig.validMimeTypes.length &&
 							!uploadConfig.validMimeTypes.includes(String(file.mimetype))
-						) {
-							error = true
-						}
+						)
+							checkUpload = { error: true, code: 3018 }
 					})
 
-					if (error) {
+					if (checkUpload.error) {
 						removeUploaded(files)
 						logger(`{red}Error on uploading file{reset}`, 'error')
 						return new BaseController().resGen({
@@ -58,7 +51,7 @@ class MultipartMiddleware extends BaseMiddleware {
 							res,
 							status: 400,
 							result: false,
-							error_code: 3017,
+							error_code: checkUpload.code,
 						})
 					}
 				}

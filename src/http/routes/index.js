@@ -31,7 +31,7 @@ import generalController from '../modules/general/controller'
 // ──────────────────────────────────────────────────────────────
 //   :::::: R O U T E S : :  :   :    :     :        :          :
 // ──────────────────────────────────────────────────────────────
-router.get('/shake-hand', generalController.upload)
+router.get('/shake-hand', generalController.shakeHand)
 
 // ─── UPLOAD ─────────────────────────────────────────────────────────────────────
 router.post('/upload', generalController.upload)

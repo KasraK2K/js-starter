@@ -37,8 +37,8 @@ class GeneralLogic extends BaseLogic {
 						fs.mkdirSync(dirPath, { recursive: true })
 						fs.renameSync(file.filepath, filepath)
 					} catch (err) {
-						logger(`{red}Error on create folder or rename file{reset}`, LoggerEnum.ERROR)
-						logger(`{red}${err.stack}{reset}`, LoggerEnum.ERROR)
+						logger(`{red}Error on create folder or rename file{reset}`, 'error')
+						logger(`{red}${err.stack}{reset}`, 'error')
 						return reject({ result: false, error_code: 3000 })
 					}
 

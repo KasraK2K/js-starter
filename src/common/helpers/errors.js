@@ -17,6 +17,7 @@ const map = new Map([
 	[3015, 'Constraint erro'],
 	[3016, 'Error on multipart header'],
 	[3017, 'Error on uploading file'],
+	[3018, 'MimeType is not valid'],
 ])
 
 export const getError = (code) => {
