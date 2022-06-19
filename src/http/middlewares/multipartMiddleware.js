@@ -4,8 +4,6 @@ import formidable from 'formidable'
 import BaseController from '../classes/controller/BaseController'
 import config from 'config'
 import { logger } from '../../common/helpers/logger'
-import os from 'os'
-import fs from 'fs'
 import { uploadDirPath, removeUploaded } from '../../common/helpers/upload'
 
 const uploadConfig = config.get('upload')

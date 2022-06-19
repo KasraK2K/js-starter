@@ -1,6 +1,4 @@
 import BaseController from '../../classes/controller/BaseController'
-import fs from 'fs'
-import path from 'path'
 import generalLogic from './logic'
 
 class GeneralController extends BaseController {
