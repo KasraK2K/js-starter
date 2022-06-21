@@ -5,6 +5,7 @@ import BaseController from '../classes/controller/BaseController'
 import config from 'config'
 import { logger } from '../../common/helpers/logger'
 import { uploadDirPath, removeUploaded } from '../../common/helpers/upload'
+import { getError } from '../../common/helpers/errors'
 
 const uploadConfig = config.get('upload')
 
@@ -15,17 +16,21 @@ class MultipartMiddleware extends BaseMiddleware {
 				...uploadConfig,
 				uploadDir: uploadDirPath(uploadConfig.uploadDir),
 			})
-			let checkUpload = { error: false, code: 3000 }
+			let checkUpload = { valid: true, errors: [] }
 
 			/* ------------------------------ START: EVENTS ----------------------------- */
-			form.on('error', (err) => (checkUpload = { error: true, code: 3017 }))
+			form.on('error', (err) => {
+				checkUpload.valid = false
+				checkUpload.errors.push(getError(3017).message)
+			})
 			/* ------------------------------- END: EVENTS ------------------------------ */
 
 			form.parse(req, (err, fields, files) => {
 				if (err) {
 					logger(`{red}Error on multipart header{reset}`, 'error')
 					logger(`{red}${err.stack}{reset}`, 'error')
-					checkUpload = { error: true, code: 3016 }
+					checkUpload.valid = false
+					checkUpload.errors.push(getError(3016).message)
 				}
 
 				if (typeof files === 'object' && !Array.isArray(files)) {
@@ -37,11 +42,13 @@ class MultipartMiddleware extends BaseMiddleware {
 							uploadConfig.validMimeTypes &&
 							uploadConfig.validMimeTypes.length &&
 							!uploadConfig.validMimeTypes.includes(String(file.mimetype))
-						)
-							checkUpload = { error: true, code: 3018 }
+						) {
+							checkUpload.valid = false
+							checkUpload.errors.push(getError(3018).message)
+						}
 					})
 
-					if (checkUpload.error) {
+					if (!checkUpload.valid) {
 						removeUploaded(files)
 						logger(`{red}Error on uploading file{reset}`, 'error')
 						return new BaseController().resGen({
@@ -49,7 +56,8 @@ class MultipartMiddleware extends BaseMiddleware {
 							res,
 							status: 400,
 							result: false,
-							error_code: checkUpload.code,
+							error_code: 3017,
+							error_user_messages: checkUpload.errors,
 						})
 					}
 				}
