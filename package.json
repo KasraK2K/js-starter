@@ -1,52 +1,53 @@
 {
-  "name": "js-starter",
-  "version": "1.0.0",
-  "description": "First steps to create a new nodejs boilerplate",
-  "main": "server.js",
-  "type": "module",
-  "scripts": {
-    "start:dev": "cross-env NODE_ENV=development bash ./shell/start:dev.sh"
-  },
-  "keywords": [
-    "js-starter",
-    "boilerplate",
-    "nodejs",
-    "node",
-    "starter"
-  ],
-  "author": "Kasra Karami <Kasra.Karami.KK@gmail.com>",
-  "license": "ISC",
-  "dependencies": {
-    "ajv": "^8.11.0",
-    "ajv-formats": "^2.1.1",
-    "amqplib": "^0.10.0",
-    "auto-bind": "^5.0.1",
-    "bcryptjs": "^2.4.3",
-    "compression": "^1.7.4",
-    "config": "^3.3.7",
-    "cors": "^2.8.5",
-    "cron": "^2.0.0",
-    "cross-env": "^7.0.3",
-    "dotenv": "^16.0.0",
-    "dotenv-expand": "^8.0.3",
-    "express": "^4.18.1",
-    "express-rate-limit": "^6.4.0",
-    "firebase-admin": "^10.2.0",
-    "formidable": "^2.0.1",
-    "helmet": "^5.0.2",
-    "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.21",
-    "mongodb": "^4.5.0",
-    "nodemon": "^2.0.16",
-    "pg": "^8.7.3",
-    "redis": "^4.1.0",
-    "reflect-metadata": "^0.1.13",
-    "swagger-ui-express": "^4.3.0"
-  },
-  "devDependencies": {
-    "eslint": "^8.15.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-plugin-import": "^2.26.0"
-  }
+	"name": "js-starter",
+	"version": "1.0.0",
+	"description": "First steps to create a new nodejs boilerplate",
+	"main": "server.js",
+	"type": "module",
+	"scripts": {
+		"start:dev": "cross-env NODE_ENV=development bash ./shell/start:dev.sh",
+		"format": "prettier --write ."
+	},
+	"keywords": [
+		"js-starter",
+		"boilerplate",
+		"nodejs",
+		"node",
+		"starter"
+	],
+	"author": "Kasra Karami <Kasra.Karami.KK@gmail.com>",
+	"license": "ISC",
+	"dependencies": {
+		"ajv": "^8.11.0",
+		"ajv-formats": "^2.1.1",
+		"amqplib": "^0.10.0",
+		"auto-bind": "^5.0.1",
+		"bcryptjs": "^2.4.3",
+		"compression": "^1.7.4",
+		"config": "^3.3.7",
+		"cors": "^2.8.5",
+		"cron": "^2.0.0",
+		"cross-env": "^7.0.3",
+		"dotenv": "^16.0.0",
+		"dotenv-expand": "^8.0.3",
+		"express": "^4.18.1",
+		"express-rate-limit": "^6.4.0",
+		"firebase-admin": "^10.2.0",
+		"formidable": "^2.0.1",
+		"helmet": "^5.0.2",
+		"jsonwebtoken": "^8.5.1",
+		"lodash": "^4.17.21",
+		"mongodb": "^4.5.0",
+		"nodemon": "^2.0.16",
+		"pg": "^8.7.3",
+		"redis": "^4.1.0",
+		"reflect-metadata": "^0.1.13",
+		"swagger-ui-express": "^4.3.0"
+	},
+	"devDependencies": {
+		"eslint": "^8.15.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-config-google": "^0.14.0",
+		"eslint-plugin-import": "^2.26.0"
+	}
 }

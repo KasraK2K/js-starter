@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS users (
 Password is 12345678 and hashed by bcryptjs salt 7
 
 ```postgres
-INSERT INTO users 
+INSERT INTO users
   (
     user_name, password, first_name, last_name, email, phone, gender,
     is_active, is_verified, is_admin, is_super_admin, is_blocked
