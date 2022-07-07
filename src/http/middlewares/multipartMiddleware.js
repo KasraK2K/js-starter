@@ -16,7 +16,7 @@ class MultipartMiddleware extends BaseMiddleware {
 				...uploadConfig,
 				uploadDir: uploadDirPath(uploadConfig.uploadDir),
 			})
-			let checkUpload = { valid: true, errors: [] }
+			const checkUpload = { valid: true, errors: [] }
 
 			/* ------------------------------ START: EVENTS ----------------------------- */
 			form.on('error', (err) => {
