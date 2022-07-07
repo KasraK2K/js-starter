@@ -2,7 +2,7 @@
 //   :::::: H O W   T O   U S E : :  :   :    :     :        :          :
 /* ──────────────────────────────────────────────────────────────────────
 import RabbitMQ from 'src/common/integrations/rabbitmq'
-const rabbitmq = new RabbitMQ('amqp://username:password@localhost:5672')
+const rabbitmq = new RabbitMQ('amqp://username:password@localhost:5672').ack
 rabbitmq.producer({ name: 'Kasra' })
 rabbitmq.consumer(
 	(data) =>
