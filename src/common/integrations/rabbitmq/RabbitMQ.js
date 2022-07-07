@@ -8,6 +8,7 @@ class RabbitMQ {
 	/**
 	 * @param {Promise} callback
 	 * @param {string} queue_name
+	 * @return {void}
 	 */
 	consumer(callback, queue_name = 'rabbitmq_starter_queue') {
 		amqp.connect(this.uri, (error0, connection) => {
@@ -45,8 +46,9 @@ class RabbitMQ {
 	}
 
 	/**
-	 * @param {object} message
+	 * @param {Record<string, any>} message
 	 * @param {string} queue_name
+	 * @return {void}
 	 */
 	producer(message = {}, queue_name = 'rabbitmq_starter_queue') {
 		amqp.connect(this.uri, (error0, connection) => {
